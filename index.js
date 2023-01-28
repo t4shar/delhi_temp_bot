@@ -28,16 +28,20 @@ const dosomething = async()=>{
     return res.data.current.temp_c;
     
 } catch (error) {
-        console.log(error);
+    return error;
 }
 }
-
 
 
 bot.on('message', async (msg) => {
+    // console.log(msg);
+    if(msg.text === 'Stop Bot'){ 
+        bot.off();
+        return;
+    }
     var time = now.getHours() + ":" + now.getMinutes();
     var mins = now.getMinutes();
-    console.log(mins);
+    // console.log(mins);
     if(mins !='00'){
         const data = await dosomething();
         const chatId = msg.chat.id;
