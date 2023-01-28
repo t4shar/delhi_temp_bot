@@ -36,14 +36,18 @@ const dosomething = async()=>{
 
 bot.on('message', async (msg) => {
     var time = now.getHours() + ":" + now.getMinutes();
-    const data = await dosomething();
-    const chatId = msg.chat.id;
-    bot.sendMessage(chatId,'Delhi Temperature at '+time+' = '+data+'°C');
-
+    var mins = now.getMinutes();
+    console.log(mins);
+    if(mins !='00'){
+        const data = await dosomething();
+        const chatId = msg.chat.id;
+        bot.sendMessage(chatId,'Delhi Temperature at '+time+' = '+data+'°C');
+    }
     setTimeout( async function rfun() {
+    const f_now = new Date();
      const data = await dosomething();
      const chatId = msg.chat.id;
-     bot.sendMessage(chatId,'Delhi Temperature at '+time+' = '+data+'°C');
+     bot.sendMessage(chatId,'Delhi Temperature at '+f_now.getHours() + ":" + f_now.getMinutes()+' = '+data+'°C');
         setTimeout(rfun, delay);
      }, start);
   
